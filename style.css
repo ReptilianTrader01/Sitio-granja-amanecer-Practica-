@@ -234,40 +234,41 @@ body {
 /* Cartas de productos */
 .lista-productos {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cartas por fila */
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr); /* siempre 3 por fila */
+  gap: 1.5rem; /* menos espacio entre cards */
 }
 
 .producto {
   background-color: #f5f5f5;
-  border-radius: 10px;
-  padding: 1rem;
+  border-radius: 8px;
+  padding: .5rem; 
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
 .producto img {
-  width: 100%;
-  height: 200px;
+  width: 80%;
+  height: 200px; 
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .producto h3 {
-  margin-top: 1rem;
-  font-size: 1.4rem;
+  margin-top: 0.5rem;
+  font-size: 1.5rem; 
   color: #2e7d32;
 }
 
 .producto p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #333;
-  margin: 0.5rem 0 1rem;
+  margin: 0.3rem 0 0.8rem;
 }
 
 .btn-detalles {
   display: inline-block;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
   background-color: #6f4e37; /* café */
   color: #fff;
   text-decoration: none;
