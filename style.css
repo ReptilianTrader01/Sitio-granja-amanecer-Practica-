@@ -359,8 +359,23 @@ body {
   color: #444;
   margin-bottom: 2rem;
 }
+.nosotros-card {
+  background-color: #fff;
+  border: 1px solid #c8e6c9;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: all 0.3s ease; /* transición suave */
+}
 
-/* Noticias 
+.nosotros-card:hover {
+  transform: scale(1.05); /* se agranda un poco */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* sombra más marcada */
+}
+
+
+/*Noticias
 .noticias {
   padding: 4rem 2rem;
   background-color: #f1f8e9;
@@ -416,6 +431,22 @@ body {
 .noticia .btn:hover {
   background-color: #388e3c;
 }
+
+.noticia {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease; 
+}
+
+.noticia:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25); 
+}
+
 
 /* Servicios */
 .servicios {
@@ -490,6 +521,20 @@ body {
 
 .btn-suscribir:hover {
   background-color: #388e3c;
+}
+
+.paquete {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease; /* transición suave */
+}
+
+.paquete:hover {
+  transform: scale(1.05); /* se agranda un poco */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25); /* sombra más marcada */
 }
 
 /* Contacto */

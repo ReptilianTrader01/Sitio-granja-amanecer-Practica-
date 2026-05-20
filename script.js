@@ -46,7 +46,7 @@ buscadorInput.addEventListener("keyup", () => {
   });
 });
 
-// 2. Filtros por categoría y precio
+//Filtros por categoría y precio
 const filtros = document.querySelectorAll(".filtros select");
 
 filtros.forEach(filtro => {
@@ -57,12 +57,12 @@ filtros.forEach(filtro => {
     productos.forEach(prod => {
       let mostrar = true;
 
-      // Categoría
+      //Categoría
       if (categoria && !prod.classList.contains(categoria)) {
         mostrar = false;
       }
 
-      // Precio (ejemplo con data-atributos)
+      //Precio 
       const precioProd = parseInt(prod.getAttribute("data-precio"));
       if (precio === "bajo" && precioProd >= 100) mostrar = false;
       if (precio === "medio" && (precioProd < 100 || precioProd > 500)) mostrar = false;
@@ -73,8 +73,9 @@ filtros.forEach(filtro => {
   });
 });
 
-// 3. Animación hover (solo con CSS, pero JS puede añadir clases)
+//Animación hover
 productos.forEach(prod => {
   prod.addEventListener("mouseenter", () => prod.classList.add("hover"));
   prod.addEventListener("mouseleave", () => prod.classList.remove("hover"));
 });
+
