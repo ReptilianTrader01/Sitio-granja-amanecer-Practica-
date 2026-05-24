@@ -217,6 +217,33 @@ body {
   background-color: #5a3d2c;
 }
 
+.icono-carrito {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  background-color: #2e7d32;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+
+.icono-carrito:hover {
+  background-color: #1b5e20;
+}
+
+#contador-carrito {
+  background: #fff;
+  color: #2e7d32;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  margin-left: 0.5rem;
+}
+
 /* Filtros */
 .filtros {
   display: flex;
@@ -278,6 +305,43 @@ body {
 
 .btn-detalles:hover {
   background-color: #5a3d2c;
+}
+
+.precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #6f4e37; /* café */
+  margin: 0.5rem 0;
+}
+
+.acciones-producto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.cantidad {
+  width: 60px;
+  padding: 0.4rem;
+  border: 2px solid #6f4e37;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.btn-carrito {
+  padding: 0.6rem 1.2rem;
+  background-color: #2e7d32; /* verde */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-carrito:hover {
+  background-color: #1b5e20;
 }
 
 
@@ -695,4 +759,54 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Carrito */
+.carrito {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.carrito h2 {
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+#lista-carrito {
+  margin-bottom: 2rem;
+}
+
+.item-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.item-carrito span {
+  font-weight: bold;
+}
+
+.total {
+  text-align: right;
+}
+
+#btn-finalizar {
+  padding: 0.8rem 1.5rem;
+  background-color: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#btn-finalizar:hover {
+  background-color: #1b5e20;
+}
 
