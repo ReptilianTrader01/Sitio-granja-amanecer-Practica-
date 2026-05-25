@@ -155,7 +155,7 @@ width:100%;
   align-items: center;      /* centra horizontalmente */
   justify-content: flex-start; /* alinea arriba */
   text-align: center;
-  color: #fff;
+  color: #000000;
   position: relative;
   padding-top: 4rem;        /* espacio desde arriba */
 }
@@ -706,6 +706,20 @@ width:100%;
   margin-top: 1rem;
 }
 
+.error{
+color:red;
+font-size:.9rem;
+display:block;
+margin-bottom:10px;
+}
+
+.input-error{
+border:2px solid red;
+}
+
+.correcto{
+border:2px solid #2e7d32;
+}
 
 
 /* --- Responsividad --- */

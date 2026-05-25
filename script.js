@@ -121,27 +121,208 @@ productos.forEach(prod => {
 //Contacto
 const form = document.querySelector(".contacto-form");
 
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+if(form){
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const mensaje = document.getElementById("mensaje").value.trim();
+form.addEventListener("submit",(e)=>{
 
-    if (!nombre || !email || !mensaje) {
-      alert("Por favor completa todos los campos.");
-      return;
-    }
+e.preventDefault();
 
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      alert("Por favor ingresa un correo válido.");
-      return;
-    }
+limpiarErrores();
 
-    alert("¡Gracias por contactarnos!");
-    form.reset();
-  });
+const nombre=
+document.getElementById("nombre");
+
+const email=
+document.getElementById("email");
+
+const mensaje=
+document.getElementById("mensaje");
+
+let valido=true;
+
+
+/* Nombre */
+
+if(nombre.value.trim()===""){
+
+mostrarError(
+nombre,
+"error-nombre",
+"Ingresa tu nombre"
+);
+
+valido=false;
+
+}
+else if(
+!/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/
+.test(nombre.value)
+){
+
+mostrarError(
+nombre,
+"error-nombre",
+"Solo se permiten letras"
+);
+
+valido=false;
+
+}
+else if(
+nombre.value.trim().length<3
+){
+
+mostrarError(
+nombre,
+"error-nombre",
+"Debe tener mínimo 3 caracteres"
+);
+
+valido=false;
+
+}else{
+
+correcto(nombre);
+
+}
+
+
+/* Email */
+
+const emailRegex=
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(email.value.trim()===""){
+
+mostrarError(
+email,
+"error-email",
+"Ingresa un correo"
+);
+
+valido=false;
+
+}
+else if(
+!emailRegex.test(
+email.value
+)
+){
+
+mostrarError(
+email,
+"error-email",
+"Correo inválido"
+);
+
+valido=false;
+
+}else{
+
+correcto(email);
+
+}
+
+
+/* Mensaje */
+
+if(
+mensaje.value.trim()===""
+){
+
+mostrarError(
+mensaje,
+"error-mensaje",
+"Escribe un mensaje"
+);
+
+valido=false;
+
+}
+else if(
+mensaje.value.trim().length<10
+){
+
+mostrarError(
+mensaje,
+"error-mensaje",
+"Debe contener al menos 10 caracteres"
+);
+
+valido=false;
+
+}else{
+
+correcto(mensaje);
+
+}
+
+
+/* Enviar */
+
+if(valido){
+
+alert(
+"¡Gracias por contactarnos!"
+);
+
+form.reset();
+
+document
+.querySelectorAll(
+".correcto"
+)
+.forEach(
+campo=>campo.classList.remove(
+"correcto"
+)
+);
+
+}
+
+});
+
+
+function mostrarError(
+input,
+id,
+mensaje
+){
+
+document
+.getElementById(id)
+.textContent=mensaje;
+
+input.classList.add(
+"input-error"
+);
+
+}
+
+
+function correcto(input){
+
+input.classList.add(
+"correcto"
+);
+
+}
+
+
+function limpiarErrores(){
+
+document
+.querySelectorAll(
+".error"
+)
+.forEach(
+e=>e.textContent=""
+);
+
+document.querySelectorAll("input,textarea").forEach(campo=>{
+  campo.classList.remove("input-error","correcto");
+    });
+  }
 }
 
 // Funciones del carrito
@@ -218,30 +399,12 @@ $${item.precio} MXN c/u
 <span>${item.cantidad}</span>
 
 <button onclick="cambiarCantidad('${item.nombre}',1)">
-+
-</button>
-
++</button>
 </div>
-
-<h2>
-
-$${item.precio*item.cantidad} MXN
-
-</h2>
-
+<h2>$${item.precio*item.cantidad} MXN</h2>
 <button
 class="eliminar"
-onclick="eliminarProducto('${item.nombre}')"
->
-
-🗑️
-
-</button>
-
-</div>
-
-`;
-
+onclick="eliminarProducto('${item.nombre}')">🗑️</button></div>`;
 });
 
 document.getElementById(

@@ -28,19 +28,25 @@
     <p>Estamos aquí para responder tus dudas y recibir tus comentarios.</p>
 
     <div class="contacto-grid">
-      <!-- Formulario -->
       <form class="contacto-form">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" required>
 
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" name="email" required>
+<label for="nombre">Nombre</label>
+<input type="text" id="nombre" name="nombre">
+<small class="error" id="error-nombre"></small>
 
-        <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+<label for="email">Correo electrónico</label>
+<input type="email" id="email" name="email">
+<small class="error" id="error-email"></small>
 
-        <button type="submit" class="btn">Enviar</button>
-      </form>
+<label for="mensaje">Mensaje</label>
+<textarea id="mensaje" name="mensaje" rows="5"></textarea>
+<small class="error" id="error-mensaje"></small>
+
+<button type="submit" class="btn">
+Enviar
+</button>
+
+</form>
 
       <!-- Información -->
       <div class="contacto-info">
