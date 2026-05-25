@@ -18,82 +18,120 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 1rem 2rem;
-  background-color: #2e7d32; /* verde */
+  background-color: #2e7d32;
+
+  flex-wrap: wrap; /* permite saltar líneas */
+  gap: 1rem;
 }
 
 .logo {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding-top: 3rem;
-  margin-top: 3rem;
-  gap: 0.8rem;
-  font-size: 2.5rem;
+  gap: .8rem;
+
+  font-size: 2rem;
   font-weight: bold;
   color: #fff;
-  font-family: 'Playfair Display', serif; /* tipografía elegante */
+  font-family: 'Playfair Display', serif;
+
+  padding:0;
+  margin:0;
 }
 
-
 .logo img {
-  height: 150px; /* ajusta tamaño del logo */
-  width: auto;
+  height: 110px;
+  width:auto;
 }
 
 .nav-links {
   list-style: none;
+
   display: flex;
-  gap: 2rem; /* más espacio entre links */
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap; /* importante */
+
+  gap: 1rem;
+
+  margin:0;
+  padding:0;
+
+  flex:1;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #fff;
-  font-weight: 600;
-  font-size: 2rem;
-  padding: 0.6rem 1rem; 
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
+  color:#fff;
+
+  font-weight:600;
+  font-size:1.5rem; /* reducido */
+
+  padding:.6rem 1rem;
+
+  border-radius:6px;
+
+  transition:.3s;
+
+  white-space: nowrap; /* evita cortar texto */
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  background-color: #266c29; /* verde más oscuro al pasar */
+  background-color:#266c29;
 }
 
 
-/* Hero */
-.hero {  
-  text-align: center;
-  padding: 5rem 2rem;
-  background: linear-gradient(to right, #dcedc8, #a5d6a7);
+/* TABLET */
+
+@media (max-width:1000px){
+
+.navbar{
+flex-direction:column;
 }
 
-.hero h1 {
-  font-size: 3rem;
-  color: #000000;
+.logo img{
+height:90px;
 }
 
-.hero p {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  color: #000000;
+.nav-links{
+gap:.8rem;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 0.8rem 1.5rem;
-  background-color: #4caf50;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+.nav-links a{
+font-size:1.2rem;
 }
 
-.btn:hover {
-  background-color: #388e3c;
+}
+
+
+/* MÓVIL */
+
+@media (max-width:600px){
+
+.nav-links{
+
+flex-direction:column;
+width:100%;
+
+}
+
+.nav-links li{
+
+width:100%;
+text-align:center;
+
+}
+
+.nav-links a{
+
+display:block;
+width:100%;
+
+}
+
 }
 
 /* Estilo diferente para el segundo botón */
