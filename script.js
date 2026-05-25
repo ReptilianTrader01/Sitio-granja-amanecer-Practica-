@@ -38,13 +38,16 @@ window.addEventListener("load", () => {
 const buscadorInput = document.querySelector(".buscador input");
 const productos = document.querySelectorAll(".producto");
 
-buscadorInput.addEventListener("keyup", () => {
-  const texto = buscadorInput.value.toLowerCase();
-  productos.forEach(prod => {
-    const nombre = prod.querySelector("h3").textContent.toLowerCase();
-    prod.style.display = nombre.includes(texto) ? "block" : "none";
+if (buscadorInput) {
+  buscadorInput.addEventListener("keyup", () => {
+    const texto = buscadorInput.value.toLowerCase();
+
+    productos.forEach(prod => {
+      const nombre = prod.querySelector("h3").textContent.toLowerCase();
+      prod.style.display = nombre.includes(texto) ? "block" : "none";
+    });
   });
-});
+}
 
 //Filtros por categoría y precio
 const filtros = document.querySelectorAll(".filtros select");
@@ -83,9 +86,10 @@ botonesCarrito.forEach(boton => {
     const precioTexto = producto.querySelector(".precio").textContent.replace("$","").replace("MXN","");
     const precio = parseInt(precioTexto.trim());
     const cantidad = parseInt(producto.querySelector(".cantidad").value);
+    const imagen = producto.querySelector("img").src;
 
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    carrito.push({ nombre, precio, cantidad });
+    carrito.push({ nombre, precio, cantidad, imagen });
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
     actualizarContadorCarrito();
@@ -97,7 +101,12 @@ botonesCarrito.forEach(boton => {
 function actualizarContadorCarrito() {
   const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-  document.getElementById("contador-carrito").textContent = totalItems;
+
+  const contador = document.getElementById("contador-carrito");
+
+  if (contador) {
+    contador.textContent = totalItems;
+  }
 }
 
 // Llamar al inicio
@@ -112,71 +121,204 @@ productos.forEach(prod => {
 //Contacto
 const form = document.querySelector(".contacto-form");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const mensaje = document.getElementById("mensaje").value.trim();
+    const nombre = document.getElementById("nombre").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const mensaje = document.getElementById("mensaje").value.trim();
 
-  if (!nombre || !email || !mensaje) {
-    alert("Por favor completa todos los campos.");
-    return;
-  }
+    if (!nombre || !email || !mensaje) {
+      alert("Por favor completa todos los campos.");
+      return;
+    }
 
-  if (!/\S+@\S+\.\S+/.test(email)) {
-    alert("Por favor ingresa un correo válido.");
-    return;
-  }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      alert("Por favor ingresa un correo válido.");
+      return;
+    }
 
-  // Simulación de envío
-  alert("¡Gracias por contactarnos! Te responderemos pronto.");
-  form.reset();
-});
+    alert("¡Gracias por contactarnos!");
+    form.reset();
+  });
+}
 
 // Funciones del carrito
-const listaCarrito = document.getElementById("lista-carrito");
-const totalPrecio = document.getElementById("total-precio");
+const listaCarrito=document.getElementById("lista-carrito");
 
-function mostrarCarrito() {
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  listaCarrito.innerHTML = "";
-  let total = 0;
+function mostrarCarrito(){
 
-  if (carrito.length === 0) {
-    listaCarrito.innerHTML = "<p>Tu carrito está vacío</p>";
-    totalPrecio.textContent = "$0 MXN";
-    return;
-  }
+const carrito=JSON.parse(
+localStorage.getItem("carrito")
+)||[];
 
-  carrito.forEach((item, index) => {
-    const div = document.createElement("div");
-    div.classList.add("item-carrito");
-    div.innerHTML = `
-      <span>${item.cantidad} x ${item.nombre}</span>
-      <span>$${item.precio} MXN</span>
-      <button onclick="eliminarItem(${index})">❌</button>
-    `;
-    listaCarrito.appendChild(div);
-    total += item.cantidad * item.precio;
-  });
 
-  totalPrecio.textContent = `$${total} MXN`;
+const agrupados={};
+
+carrito.forEach(item=>{
+
+if(agrupados[item.nombre]){
+
+agrupados[item.nombre].cantidad+=item.cantidad;
+
+}else{
+
+agrupados[item.nombre]={
+
+...item,
+
+imagen:item.imagen || "Recursos/default.png"
+
+};
+
 }
 
-
-function eliminarItem(index) {
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  carrito.splice(index, 1);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  mostrarCarrito();
-}
-
-document.getElementById("btn-finalizar").addEventListener("click", () => {
-  alert("¡Gracias por tu compra!");
-  localStorage.removeItem("carrito");
-  mostrarCarrito();
 });
+
+
+listaCarrito.innerHTML="";
+
+let subtotal=0;
+let totalItems=0;
+
+Object.values(agrupados).forEach((item,index)=>{
+
+subtotal+=item.precio*item.cantidad;
+
+totalItems+=item.cantidad;
+
+
+listaCarrito.innerHTML+=`
+
+<div class="item-carrito">
+
+<div class="item-info">
+
+<img src="${item.imagen}">
+
+<div>
+
+<h3>${item.nombre}</h3>
+
+<p>
+$${item.precio} MXN c/u
+</p>
+
+</div>
+
+</div>
+
+<div class="controles">
+
+<button onclick="cambiarCantidad('${item.nombre}',-1)">
+−
+</button>
+
+<span>${item.cantidad}</span>
+
+<button onclick="cambiarCantidad('${item.nombre}',1)">
++
+</button>
+
+</div>
+
+<h2>
+
+$${item.precio*item.cantidad} MXN
+
+</h2>
+
+<button
+class="eliminar"
+onclick="eliminarProducto('${item.nombre}')"
+>
+
+🗑️
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById(
+"productos-unicos"
+).textContent=Object.keys(
+agrupados
+).length;
+
+document.getElementById(
+"cantidad-total"
+).textContent=totalItems;
+
+document.getElementById(
+"subtotal"
+).textContent=`$${subtotal} MXN`;
+
+document.getElementById(
+"total-precio"
+).textContent=`$${subtotal} MXN`;
+
+}
+
+
+function cambiarCantidad(nombre,cambio){
+
+let carrito=
+JSON.parse(
+localStorage.getItem("carrito")
+)||[];
+
+
+const producto=
+carrito.find(
+p=>p.nombre===nombre
+);
+
+if(!producto)return;
+
+producto.cantidad+=cambio;
+
+if(producto.cantidad<=0){
+
+carrito=
+carrito.filter(
+p=>p.nombre!==nombre
+);
+
+}
+
+localStorage.setItem(
+"carrito",
+JSON.stringify(carrito)
+);
+
+mostrarCarrito();
+
+}
+
+function eliminarProducto(nombre){
+
+let carrito=
+JSON.parse(
+localStorage.getItem("carrito")
+)||[];
+
+carrito=carrito.filter(
+p=>p.nombre!==nombre
+);
+
+localStorage.setItem(
+"carrito",
+JSON.stringify(carrito)
+);
+
+mostrarCarrito();
+
+}
 
 mostrarCarrito();
 

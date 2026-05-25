@@ -24,14 +24,69 @@
   </header>
 
   <!-- Carrito -->
-  <section class="carrito">
-    <h2> Tu Carrito de Compras</h2>
-    <div id="lista-carrito"></div>
-    <div class="total">
-      <h3>Total: <span id="total-precio">$0 MXN</span></h3>
-      <button id="btn-finalizar">Finalizar Compra</button>
+  <section class="carrito-contenedor">
+
+    <!-- Productos -->
+    <div class="carrito-productos">
+
+        <h1>Tu Carrito de Compras 🌿</h1>
+        <p>Revisa los productos que has agregado.</p>
+
+        <div id="lista-carrito"></div>
+
     </div>
-  </section>
+
+    <!-- Resumen -->
+    <aside class="resumen">
+
+        <h2>🛒 Resumen de compra</h2>
+
+        <div class="detalle">
+            <span>Productos únicos</span>
+            <span id="productos-unicos">0</span>
+        </div>
+
+        <div class="detalle">
+            <span>Artículos</span>
+            <span id="cantidad-total">0</span>
+        </div>
+
+        <div class="detalle">
+            <span>Subtotal</span>
+            <span id="subtotal">$0</span>
+        </div>
+
+        <hr>
+
+        <div class="total">
+            <span>Total:</span>
+            <span id="total-precio">$0 MXN</span>
+        </div>
+
+        <h3>Opciones de pago</h3>
+
+        <label>
+            <input type="radio" name="pago" checked>
+            Tarjeta
+        </label>
+
+        <label>
+            <input type="radio" name="pago">
+            Transferencia
+        </label>
+
+        <label>
+            <input type="radio" name="pago">
+            Efectivo
+        </label>
+
+        <button id="btn-finalizar">
+            Finalizar Compra
+        </button>
+
+    </aside>
+
+</section>
 
   <!-- Footer -->
   <footer class="footer">
