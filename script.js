@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuItems = document.querySelectorAll(".nav-links a");
 
   menuItems.forEach(item => {
-    if(item.getAttribute("href") === currentLocation){
+    if (item.getAttribute("href") === currentLocation) {
       item.classList.add("active");
     } else {
       item.classList.remove("active");
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Scroll suave 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function(e) {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector(this.getAttribute("href")).scrollIntoView({
       behavior: "smooth"
@@ -83,7 +83,7 @@ botonesCarrito.forEach(boton => {
   boton.addEventListener("click", () => {
     const producto = boton.closest(".producto");
     const nombre = producto.querySelector("h3").textContent;
-    const precioTexto = producto.querySelector(".precio").textContent.replace("$","").replace("MXN","");
+    const precioTexto = producto.querySelector(".precio").textContent.replace("$", "").replace("MXN", "");
     const precio = parseInt(precioTexto.trim());
     const cantidad = parseInt(producto.querySelector(".cantidad").value);
     const imagen = producto.querySelector("img").src;
@@ -120,367 +120,149 @@ productos.forEach(prod => {
 
 //Contacto
 const form = document.querySelector(".contacto-form");
-
-if(form){
-
-form.addEventListener("submit",(e)=>{
-
-e.preventDefault();
-
-limpiarErrores();
-
-const nombre=
-document.getElementById("nombre");
-
-const email=
-document.getElementById("email");
-
-const mensaje=
-document.getElementById("mensaje");
-
-let valido=true;
-
-
-/* Nombre */
-
-if(nombre.value.trim()===""){
-
-mostrarError(
-nombre,
-"error-nombre",
-"Ingresa tu nombre"
-);
-
-valido=false;
-
-}
-else if(
-!/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/
-.test(nombre.value)
-){
-
-mostrarError(
-nombre,
-"error-nombre",
-"Solo se permiten letras"
-);
-
-valido=false;
-
-}
-else if(
-nombre.value.trim().length<3
-){
-
-mostrarError(
-nombre,
-"error-nombre",
-"Debe tener mínimo 3 caracteres"
-);
-
-valido=false;
-
-}else{
-
-correcto(nombre);
-
-}
-
-
-/* Email */
-
-const emailRegex=
-/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-if(email.value.trim()===""){
-
-mostrarError(
-email,
-"error-email",
-"Ingresa un correo"
-);
-
-valido=false;
-
-}
-else if(
-!emailRegex.test(
-email.value
-)
-){
-
-mostrarError(
-email,
-"error-email",
-"Correo inválido"
-);
-
-valido=false;
-
-}else{
-
-correcto(email);
-
-}
-
-
-/* Mensaje */
-
-if(
-mensaje.value.trim()===""
-){
-
-mostrarError(
-mensaje,
-"error-mensaje",
-"Escribe un mensaje"
-);
-
-valido=false;
-
-}
-else if(
-mensaje.value.trim().length<10
-){
-
-mostrarError(
-mensaje,
-"error-mensaje",
-"Debe contener al menos 10 caracteres"
-);
-
-valido=false;
-
-}else{
-
-correcto(mensaje);
-
-}
-
-
-/* Enviar */
-
-if(valido){
-
-alert(
-"¡Gracias por contactarnos!"
-);
-
-form.reset();
-
-document
-.querySelectorAll(
-".correcto"
-)
-.forEach(
-campo=>campo.classList.remove(
-"correcto"
-)
-);
-
-}
-
-});
-
-
-function mostrarError(
-input,
-id,
-mensaje
-){
-
-document
-.getElementById(id)
-.textContent=mensaje;
-
-input.classList.add(
-"input-error"
-);
-
-}
-
-
-function correcto(input){
-
-input.classList.add(
-"correcto"
-);
-
-}
-
-
-function limpiarErrores(){
-
-document
-.querySelectorAll(
-".error"
-)
-.forEach(
-e=>e.textContent=""
-);
-
-document.querySelectorAll("input,textarea").forEach(campo=>{
-  campo.classList.remove("input-error","correcto");
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    limpiarErrores();
+    const nombre = document.getElementById("nombre");
+    const email = document.getElementById("email");
+    const mensaje = document.getElementById("mensaje");
+    let valido = true;
+
+    /* Nombre */
+    if (nombre.value.trim() === "") {
+      mostrarError(nombre, "error-nombre", "Ingresa tu nombre");
+      valido = false;
+    }
+    else if (
+      !/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(nombre.value)) {
+      mostrarError(nombre, "error-nombre", "Solo se permiten letras");
+      valido = false;
+    }
+    else if (nombre.value.trim().length < 3) {
+      mostrarError(nombre, "error-nombre", "Debe tener mínimo 3 caracteres");
+      valido = false;
+    } else {
+      correcto(nombre);
+    }
+
+    /* Email */
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email.value.trim() === "") {
+      mostrarError(
+        email,"error-email","Ingresa un correo");
+      valido = false;
+    }
+    else if (!emailRegex.test(email.value)) {
+      mostrarError(email,"error-email","Correo inválido");
+      valido = false;
+    } else {
+      correcto(email);
+    }
+
+    /* Mensaje */
+    if (mensaje.value.trim() === "") {
+      mostrarError(mensaje,"error-mensaje","Escribe un mensaje");
+      valido = false;
+    }
+    else if (mensaje.value.trim().length < 10) {
+      mostrarError(mensaje,"error-mensaje","Debe contener al menos 10 caracteres");
+      valido = false;
+    } else {
+      correcto(mensaje);
+    }
+
+    /* Enviar */
+    if (valido) {
+      alert("¡Gracias por contactarnos!");
+      form.reset();
+      document.querySelectorAll(".correcto").forEach(campo => campo.classList.remove("correcto"));
+    }
+  });
+  function mostrarError(input,id,mensaje) {
+    document.getElementById(id).textContent = mensaje;
+      input.classList.add("input-error");
+  }
+  function correcto(input) {
+    input.classList.add("correcto");
+  }
+  function limpiarErrores() {
+    document.querySelectorAll(".error").forEach(e => e.textContent = "");
+    document.querySelectorAll("input,textarea").forEach(campo => {
+      campo.classList.remove("input-error", "correcto");
     });
   }
 }
 
 // Funciones del carrito
-const listaCarrito=document.getElementById("lista-carrito");
+const listaCarrito = document.getElementById("lista-carrito");
+function mostrarCarrito() {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const agrupados = {};
+  carrito.forEach(item => {
+    if (agrupados[item.nombre]) {
+      agrupados[item.nombre].cantidad += item.cantidad;
+    } else {
+      agrupados[item.nombre] = {
+        ...item,
+        imagen: item.imagen || "Recursos/default.png"
+      };
+    }
+  });
 
-function mostrarCarrito(){
-
-const carrito=JSON.parse(
-localStorage.getItem("carrito")
-)||[];
-
-
-const agrupados={};
-
-carrito.forEach(item=>{
-
-if(agrupados[item.nombre]){
-
-agrupados[item.nombre].cantidad+=item.cantidad;
-
-}else{
-
-agrupados[item.nombre]={
-
-...item,
-
-imagen:item.imagen || "Recursos/default.png"
-
-};
-
-}
-
-});
-
-
-listaCarrito.innerHTML="";
-
-let subtotal=0;
-let totalItems=0;
-
-Object.values(agrupados).forEach((item,index)=>{
-
-subtotal+=item.precio*item.cantidad;
-
-totalItems+=item.cantidad;
-
-
-listaCarrito.innerHTML+=`
-
+  listaCarrito.innerHTML = "";
+  let subtotal = 0;
+  let totalItems = 0;
+  Object.values(agrupados).forEach((item, index) => {
+    subtotal += item.precio * item.cantidad;
+    totalItems += item.cantidad;
+    listaCarrito.innerHTML += `
 <div class="item-carrito">
-
 <div class="item-info">
-
 <img src="${item.imagen}">
-
 <div>
-
 <h3>${item.nombre}</h3>
-
-<p>
-$${item.precio} MXN c/u
-</p>
-
+<p>$${item.precio} MXN c/u</p>
 </div>
-
 </div>
-
 <div class="controles">
-
 <button onclick="cambiarCantidad('${item.nombre}',-1)">
 −
 </button>
-
 <span>${item.cantidad}</span>
-
 <button onclick="cambiarCantidad('${item.nombre}',1)">
 +</button>
 </div>
-<h2>$${item.precio*item.cantidad} MXN</h2>
+<h2>$${item.precio * item.cantidad} MXN</h2>
 <button
 class="eliminar"
 onclick="eliminarProducto('${item.nombre}')">🗑️</button></div>`;
-});
-
-document.getElementById(
-"productos-unicos"
-).textContent=Object.keys(
-agrupados
-).length;
-
-document.getElementById(
-"cantidad-total"
-).textContent=totalItems;
-
-document.getElementById(
-"subtotal"
-).textContent=`$${subtotal} MXN`;
-
-document.getElementById(
-"total-precio"
-).textContent=`$${subtotal} MXN`;
-
+  });
+  document.getElementById("productos-unicos").textContent = Object.keys(agrupados).length;
+  document.getElementById("cantidad-total").textContent = totalItems;
+  document.getElementById("subtotal").textContent = `$${subtotal} MXN`;
+  document.getElementById("total-precio").textContent = `$${subtotal} MXN`;
 }
 
+function cambiarCantidad(nombre, cambio) {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-function cambiarCantidad(nombre,cambio){
+  const producto = carrito.find(p => p.nombre === nombre);
+  if (!producto) return;
+  producto.cantidad += cambio;
+  if (producto.cantidad <= 0) {
+    carrito = carrito.filter(p => p.nombre !== nombre);
+  }
 
-let carrito=
-JSON.parse(
-localStorage.getItem("carrito")
-)||[];
-
-
-const producto=
-carrito.find(
-p=>p.nombre===nombre
-);
-
-if(!producto)return;
-
-producto.cantidad+=cambio;
-
-if(producto.cantidad<=0){
-
-carrito=
-carrito.filter(
-p=>p.nombre!==nombre
-);
-
+  localStorage.setItem("carrito",JSON.stringify(carrito));
+  mostrarCarrito();
 }
 
-localStorage.setItem(
-"carrito",
-JSON.stringify(carrito)
-);
-
-mostrarCarrito();
-
-}
-
-function eliminarProducto(nombre){
-
-let carrito=
-JSON.parse(
-localStorage.getItem("carrito")
-)||[];
-
-carrito=carrito.filter(
-p=>p.nombre!==nombre
-);
-
-localStorage.setItem(
-"carrito",
-JSON.stringify(carrito)
-);
-
-mostrarCarrito();
-
+function eliminarProducto(nombre) {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  carrito = carrito.filter(p => p.nombre !== nombre);
+  localStorage.setItem("carrito",JSON.stringify(carrito));
+  mostrarCarrito();
 }
 
 mostrarCarrito();
